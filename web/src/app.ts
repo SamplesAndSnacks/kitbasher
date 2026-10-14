@@ -163,14 +163,15 @@ function syncWizard(): void {
   $('samples-next').toggleAttribute('disabled', !loaded() || building);
   $('project-save').toggleAttribute('disabled', !loaded() || building);
   $('models-next').toggleAttribute('disabled', building);
-  $('models-next').textContent = building ? 'Building firmware…' : !boxes().some(i => i.checked) ? 'Choose machines' : !ready ? 'Make room' : 'Build firmware';
+  $('models-next').textContent = building ? 'Checking firmware…' : !boxes().some(i => i.checked) ? 'Choose machines' : !ready ? 'Make room' : 'Arrange categories';
   $('categories-next').toggleAttribute('disabled', building);
+  $('categories-next').textContent = building ? 'Building firmware…' : 'Build firmware';
   $('build').toggleAttribute('disabled', !ready || building);
   $('build').hidden = !!downloadUrl;
   document.querySelectorAll<HTMLButtonElement>('[data-step]').forEach(b => {
     const n = Number(b.dataset.step);
     b.disabled = building || (n > 1 && !asked.ok) || (n > 3 && !ready);
-    if (n === ([2, 4].includes(step) ? 3 : step)) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    if (n === (step === 2 ? 3 : step)) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
   });
   document.querySelectorAll<HTMLButtonElement>('[data-back]').forEach(b => { b.disabled = building; });
 }
@@ -1128,9 +1129,9 @@ async function main(): Promise<void> {
   $('models-next').addEventListener('click', () => {
     if (!boxes().some(i => i.checked)) { $('machines').focus(); $('machines').scrollIntoView({ block: 'start' }); return; }
     if (!planReady() || packedCapacityProblem) { $<HTMLDetailsElement>('capacity-details').open = true; $('capacity-details').scrollIntoView({ block: 'nearest' }); return; }
-    void onBuild('download');
+    showStep(4);
   });
-  $('categories-next').addEventListener('click', () => showStep(3));
+  $('categories-next').addEventListener('click', () => showStep(5));
   document.querySelector('.builder-tools')!.addEventListener('click', e => {
     if ((e.target as HTMLElement).closest('button')) document.querySelector<HTMLDetailsElement>('.builder-tools')!.open = false;
   });

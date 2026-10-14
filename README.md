@@ -44,12 +44,13 @@ See [FX order](docs/FX-ORDER.md).
 3. **Choose machines.** Browse the model cards by category and select what you want.
    Click a machine's name for its screen preview and control descriptions.
    The memory meters and sample trimming controls are below the browser.
-   Under **Options**, you can edit [E12 samples](docs/SAMPLES.md) or arrange the
-   machine menu; both are optional.
-4. **Build.** Click **Build firmware**. **Download firmware** lets you save
-   to save the new `.syx`. **Save for next time → Save project** keeps your samples,
+   Under **Options**, you can edit [E12 samples](docs/SAMPLES.md).
+4. **Arrange categories.** Click **Arrange categories** to review the machine menu,
+   reorder or rename categories, and move machines. Keep the defaults if you prefer.
+5. **Build.** Click **Build firmware**. **Download firmware** saves
+   the new `.syx`. **Save for next time → Save project** keeps your samples,
    machines and layout in a [project file](docs/PROJECT-FILE.md).
-5. **Send it.** In Chrome, click **Send firmware**, allow MIDI access, and choose
+6. **Send it.** In Chrome, click **Send firmware**, allow MIDI access, and choose
    your MIDI output. Connect the interface's OUT to the Machinedrum's MIDI IN.
    Hold FUNCTION while powering on and choose [5 LT] MIDI UPGRADE, then click
    **I'm ready — send firmware**. Keep the tab open and computer awake until it

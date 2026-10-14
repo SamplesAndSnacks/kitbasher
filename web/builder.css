@@ -2,7 +2,7 @@
 body.simple-builder main{max-width:1320px;padding-top:20px}
 body.simple-builder .page-head{padding-bottom:12px;margin-bottom:10px}
 .simple-builder .site-nav{margin-bottom:16px;padding-bottom:8px}
-.simple-builder .wizard-steps{grid-template-columns:repeat(3,1fr);margin-bottom:22px}
+.simple-builder .wizard-steps{grid-template-columns:repeat(4,1fr);margin-bottom:22px}
 .simple-builder #status:empty{display:none}
 .simple-builder #status[data-kind=ok]{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 body.simple-builder .upload{margin:0 auto;padding:24px;max-width:680px}
@@ -59,6 +59,6 @@ body.simple-builder .upload #drop{margin:18px 0;padding:24px}
 body.simple-builder[data-view="3"] main{max-width:1180px}
 @media(max-width:760px){
  body.simple-builder main{padding:18px 16px}
- .simple-builder .wizard-steps{gap:6px}
+ .simple-builder .wizard-steps{grid-template-columns:repeat(2,1fr);gap:6px}
  .simple-builder .wizard-steps button{padding:10px;font-size:13px}
 }

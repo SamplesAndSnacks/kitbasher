@@ -119,8 +119,8 @@ placed after the knob labels in their RAM range, or alone in that range when no
 selected machine has labels. Discovery finds the sequencer by signature, and the
 base's profile must record the fix as run on it: OS 1.63 (prepared) and X.14
 have it, X.14 on hardware (plain, p-locked and swung unmutes). The DEV builds enter their own code from the sequencer's tick handler
-and buffer toggle, so discovery does not find it there. Turn it off with *Fix
-unmute latency* on the Download step or `--no-unmute-fix`; the image is then
+and buffer toggle, so discovery does not find it there. Browser builds include
+the fix automatically where supported. The CLI's `--no-unmute-fix` disables it; the image is then
 the one a build without the fix makes.
 
 ## X.14

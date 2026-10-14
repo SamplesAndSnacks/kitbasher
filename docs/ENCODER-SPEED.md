@@ -1,6 +1,6 @@
 # Swap Speeds
 
-The optional **Add Swap Speeds setting** firmware option adds a mode
+Browser builds automatically add a **Swap Speeds** mode on supported firmware
 to **GLOBAL → CONTROL → MECH SETTINGS**, alongside knob resolution.
 
 - **OFF:** turn normally for the existing fine speed; press and turn for 7× speed.
@@ -16,11 +16,12 @@ with it off. Changing this mode does not alter encoder direction, parameter
 ranges, kit data, or press-to-lock events. It applies to the eight data-entry
 encoders and LEVEL; sound selection keeps its existing behavior.
 
-The public builder offers this option only when all of its instruction
+The public builder includes this setting only when all of its instruction
 signatures match. X.14 and prepared stock 1.63 are supported. X.20 is not yet
 supported. The CLI uses `--encoder-settings`; `--no-encoder-settings` overrides
-a restored project's choice. Projects preserve whether to include the setting;
-the instrument's global slot holds the actual ON/OFF value.
+a restored project's choice. Browser projects record that the setting is included;
+older projects also receive it when restored in the browser. The instrument's
+global slot holds the actual ON/OFF value.
 
 ## Private images
 

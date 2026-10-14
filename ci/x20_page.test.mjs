@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 // web/src/app.ts on MDX X.20 B: the file goes through the same steps as the other bases (no separate
-// one-click panel), with its own plan behind the meters, the layout editor and the build, and what X.20
-// does not have shown turned off with the reason. The engine side is tested in engine/test/x20_flow.test.ts.
+// one-click panel), with its own plan behind the meters, the layout editor and the build.
+// This retained path is currently blocked by the shipped recipe. The engine side is tested in engine/test/x20_flow.test.ts.
 const html = readFileSync(new URL('../web/index.html', import.meta.url), 'utf8');
 const app = readFileSync(new URL('../web/src/app.ts', import.meta.url), 'utf8');
 const ui = readFileSync(new URL('../web/src/layout-ui.ts', import.meta.url), 'utf8');
@@ -63,21 +63,16 @@ test('X.20: swapped samples reach the plan, the build and the Samples step\'s ba
   assert.doesNotMatch(app, /sample swapping is not available on \$\{x20/);
 });
 
-test('X.20: what it does not have is shown turned off with the reason, not left out', () => {
-  assert.match(html, /<p id="x20-unavailable" class="fine" hidden><\/p>/);
+test('X.20: retained firmware details explain unavailable features without build switches', () => {
+  assert.doesNotMatch(html, /id="(?:build-options|unmute-fix|midi-chroma|pitch-labels|encoder-settings)"/);
   const off = slice('const X20_OFF =', ';\nconst X20_FIXED_WHY');
   for (const f of ['MIDI chromatic note input', 'pitch note names', 'INP IDs 80\\.\\.85'])
     assert.match(off, new RegExp(f));
   assert.doesNotMatch(off, /INTERNAL|E12/);                     // sample swapping is offered on X.20
   assert.doesNotMatch(off, /unmute/);                           // so is the unmute fix (the recipe's own, for X.20's mute keys)
-  const sync = slice('function syncChromaOption(', 'function syncMeters(');
-  assert.match(sync, /box\.disabled = !!x20;/);
-  assert.match(sync, /\$<HTMLInputElement>\('unmute-fix'\)\.disabled = false;/);
-  // the X.20 build takes the unmute checkbox
-  assert.match(app, /features: \{ unmute: \$<HTMLInputElement>\('unmute-fix'\)\.checked \}/);
-  assert.match(sync, /\$\('midi-chroma-option'\)\.hidden = !x20 && /);
-  // a project never records an option X.20 cannot have
-  assert.match(app, /midiChroma: !x20 && chromaTicked\(\)/);
+  const onFile = slice('async function onFile(', 'async function onPackFiles(');
+  assert.match(onFile, /'User machines \(USR\) keep working\. ' \+ X20_OFF/);
+  assert.match(app, /features: \{ unmute: true \}/);
 });
 
 test('X.20: the layout editor shows its menu families as fixed categories, and a built X.20 file restores its layout', () => {

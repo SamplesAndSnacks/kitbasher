@@ -1,8 +1,8 @@
 # MIDI chromatic note input
 
-An optional build feature: play the selected track from a MIDI keyboard, at
-pitch. It is **off by default**. Turn it on with the *MIDI chromatic note input*
-box on the Download step, or `--midi-chroma` on the command line.
+Play the selected track from a MIDI keyboard, at pitch. Browser builds include
+this automatically on supported firmware. On the command line it remains
+opt-in with `--midi-chroma`.
 
 Supported on **OS X.14** and **OS 1.63** (the prepared base), with the same
 behaviour on both. The DEV builds read MIDI through their own queue, which is

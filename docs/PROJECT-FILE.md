@@ -2,7 +2,13 @@
 
 **Save project** on the page's Download step writes a `.kitbasher.json` file with your choices.
 Load it on the Firmware step, under *Restore an earlier layout* (before or after the OS file), to pick up where you left off; every machine keeps its ID ([Machine IDs](BASES.md#machine-ids)). With the
-same OS file and the same model packs, the page builds the same `.syx`, byte for byte.
+same OS file, model packs and builder version, the page builds the same `.syx`, byte for byte.
+
+Browser builds now always include supported firmware features: the unmute fix,
+MIDI chromatic input, pitch note names and the Swap Speeds setting. Older projects
+use these defaults too, even when they previously left a feature off. A saved
+chromatic channel is preserved. The command line still honors the stored feature
+choices and its explicit overrides.
 
 The file holds your choices only: never the OS, and never the stock E12 samples. The code is
 [engine/src/project.ts](../engine/src/project.ts).
@@ -33,9 +39,10 @@ The file holds your choices only: never the OS, and never the stock E12 samples.
 | `trim` | The Models step's sample setting: `mode` is `auto`, `keep` or `manual`; `db` and `cap` are the slider values (the trim threshold in dB, and At most in seconds, 0 for no limit). Auto mode recomputes its threshold from the same inputs, so it finds the same one. |
 | `models` | The selected models, by module name. Models the page's catalog does not have are named when the file is loaded. |
 | `layout` | Your menu layout in the `md-layout/1` format the Categories step exports, or `null` for the default layout. A layout file carries the same `uw` field. |
-| `midi_chroma` | `{ "channel": "base+4" }` when *MIDI chromatic note input* was on ([MIDI chromatic note input](MIDI-CHROMATIC.md)): the chromatic channel, `base+4`..`base+15` or `ch:1`..`ch:16`. Absent means off. It is saved whatever OS is loaded, and applies where the OS supports it. The command line's `--restore` turns the option on from it (`--no-midi-chroma` overrides). |
-| `pitch_labels` | `true` when *Show pitch as note names* was on ([Pitch note names](PITCH-LABELS.md)). Absent means off, the default; any other value is refused. It is saved whatever OS is loaded, and applies where the OS supports it. The page restores it, and the command line's `--restore` turns the option on from it (`--no-pitch-labels` overrides). |
-| `unmute_fix` | `false` when *Fix unmute latency* was turned off ([Supported bases](BASES.md#unmute-latency)). Absent means on, the default; any other value is refused. The page restores it, and the command line's `--restore` builds without the fix from it (`--unmute-fix` overrides). |
+| `midi_chroma` | `{ "channel": "base+4" }` when MIDI chromatic input is included ([MIDI chromatic note input](MIDI-CHROMATIC.md)): the channel, `base+4`..`base+15` or `ch:1`..`ch:16`. Browser saves include this where supported; older files without it use `base+4` in the browser. The command line's `--restore` enables the option only when present (`--no-midi-chroma` overrides). |
+| `pitch_labels` | `true` when pitch note names are included ([Pitch note names](PITCH-LABELS.md)); any other value is refused. Browser builds always include them where supported. The command line's `--restore` enables the option only when present (`--no-pitch-labels` overrides). |
+| `encoder_settings` | `true` when the Swap Speeds setting is included ([Swap Speeds](ENCODER-SPEED.md)). Browser builds include it wherever its instruction signatures match. This adds the device setting; it does not turn the mode ON. |
+| `unmute_fix` | `false` in older projects that disabled the unmute fix ([Supported bases](BASES.md#unmute-latency)). Absent means on; any other value is refused. Browser builds always include the fix where supported. The command line's `--restore` still honors `false` (`--unmute-fix` overrides). |
 | `uw` | Your answer to *Does your Machinedrum have the UW option?*: `true` or `false`. Absent in files saved before the question. Loading a file never changes an answer you gave on the page (it says so when they differ); with no answer given yet, the file's is used for that visit. With `false` the build keeps every machine below ID 128 and leaves out models that play UW samples ([Machinedrum without UW](BASES.md#machinedrum-without-uw)). |
 
 Readers must refuse a file whose `format` is not one they know. Later versions will change the

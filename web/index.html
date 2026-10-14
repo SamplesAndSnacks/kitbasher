@@ -86,13 +86,6 @@ b.addEventListener('click',function(){r.dataset.theme=r.dataset.theme==='dark'?'
   <details id="delivery-options"><summary>More options</summary>
   <p id="ids-warning" class="fine" hidden></p>
   <div id="build-details"></div>
-  <details id="build-options"><summary>Firmware options</summary>
-  <div class="e12" id="firmware-options" hidden><label title="An unmuted track plays its next trig instead of about two steps later. Turn it off to keep this OS's sequencer exactly as it is."><input type="checkbox" id="unmute-fix" checked> Fix unmute latency</label></div>
-  <div class="e12" id="midi-chroma-option" hidden><label title="Notes on MIDI channel base+4 (channel 5 when the base channel is 1) play the selected track at their pitch, on models with pitch metadata. With live record on they record the trig and a pitch lock; with trig keys held, every held step gets the lock."><input type="checkbox" id="midi-chroma"> MIDI chromatic note input (channel base+4)</label></div>
-  <div class="e12" id="encoder-settings-option" hidden><label><input type="checkbox" id="encoder-settings"> Add Swap Speeds setting</label><p class="hint">Adds an ON/OFF mode in GLOBAL &rarr; CONTROL &rarr; MECH SETTINGS. ON makes turning fast and pressing fine. Use UP/DOWN to select a setting and LEFT/RIGHT to change it.</p></div>
-  <div class="e12" id="pitch-labels-option" hidden><label title="On the parameter page the pitch knob of a model with a note law shows the note it plays under its dial (C-3, C#3, C+3 for a quarter tone) instead of a number, as Elektron's DEV firmware shows a TONAL track's pitch."><input type="checkbox" id="pitch-labels"> Show pitch as note names (C-3, C#3)</label></div>
-  <p id="x20-unavailable" class="fine" hidden></p>
-  </details>
   <details class="project-save"><summary>Save for next time</summary><p>Save your choices to reuse them later.</p><button type="button" id="project-save" class="wizard-secondary">Save project</button></details>
   </details>
   <div class="wizard-actions"><button type="button" data-back="3">Back to machines</button></div>

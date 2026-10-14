@@ -1,9 +1,9 @@
 # Pitch note names
 
-An optional build feature: on the parameter page, the pitch knob of an added
-model shows the **note it plays** under its dial instead of a number. It is
-**off by default**. Turn it on with *Show pitch as note names* on the Download
-step, or `--pitch-labels` on the command line.
+On the parameter page, the pitch knob of an added model shows the **note it
+plays** under its dial instead of a number. Browser builds include this
+automatically on supported firmware. On the command line it remains opt-in
+with `--pitch-labels`.
 
 Supported on **OS X.14** and **OS 1.63** (the prepared base), with the same
 behaviour on both. The DEV builds are not offered it (see [DEV](#dev) below).

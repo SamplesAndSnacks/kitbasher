@@ -15,6 +15,9 @@ The mode is saved separately in each global slot. Old global settings start
 with it off. Changing this mode does not alter encoder direction, parameter
 ranges, kit data, or press-to-lock events. It applies to the eight data-entry
 encoders and LEVEL; sound selection keeps its existing behavior.
+While the dedicated **LFO setup** page is open, encoders keep their native
+turn/press speeds. Leaving that page restores the saved Swap Speeds behavior.
+The LFO parameters on the regular **ROUTING** page still honor Swap Speeds.
 
 The public builder includes this setting only when all of its instruction
 signatures match. X.14 and prepared stock 1.63 are supported. X.20 is not yet
@@ -55,6 +58,9 @@ from the runtime flash alias, reached only by the UI and encoder handler.
 The routine reverses multipliers 1 and 7 at turn time, leaving physical press
 events and other multipliers alone. The encoder index includes LEVEL and excludes
 sound selection. Separate adapters cover the X.14 and stock 1.63 register ABIs.
+Both adapters bypass reversal on native page 30 (dedicated LFO setup), using
+the page-state address discovered from the native arrow dispatcher. The check
+does not change the saved mode or physical press state.
 Hook writes are checked for conflicts and read back; the generated code is
 decoded as MCF5206e ISA_A before use. Public builds also run the whole-image
 ISA and boot gates.
@@ -76,3 +82,15 @@ press/release assignments, and other multipliers (including 4) stay unchanged.
 Regression validation must send physical encoder switch row packets before
 turn packets, then measure parameter changes; supplying a multiplier directly
 to the instruction test alone does not establish press-and-turn behavior.
+
+`ci/encoder-lfo-check.py` exercises physical turns and encoder F presses on
+ROUTING, opens LFO setup with FUNCTION + SYNTHESIS/EFFECTS/ROUTING, then exits
+back to ROUTING. It checks both directions with Swap Speeds OFF and ON, native
+page state, LFO speed values, and preservation of the global setting (36 checks).
+It uses the lab's `mdEncoderPress` emulator probe and writes a replay script,
+log and hash-bearing validation report to a new directory. No external MIDI
+is opened. For example:
+
+```text
+python ci/encoder-lfo-check.py --rom candidate.bin --out new-evidence-directory --probe /path/to/mdEncoderPress.exe --stock /path/to/elektron_sps1-1uw_os1.63.bin --factory-cache /path/to/md-uw-1.63-factory-v2.cache --dll-dir /path/to/lab/build
+```

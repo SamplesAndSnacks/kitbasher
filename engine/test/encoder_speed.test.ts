@@ -31,6 +31,28 @@ test('emitted speed code swaps 1x/7x for every data encoder and LEVEL, direction
     assert.equal(c.z,false);assert.equal(c.n,false);
   }
 });
+test('LFO setup keeps native speeds and leaving restores the saved mode on both firmware ABIs',()=>{
+  const c=cpu();
+  for(const stock of [false,true])for(let slot=0;slot<8;slot++)for(const reverse of [false,true])for(let knob=0;knob<10;knob++)for(const scale of [1,7,4,2])for(const delta of [-1,1]){
+    c.w8(S.slot,slot);c.w8(S.settings+178*slot,reverse?65:1);
+    // Page 0 includes normal SYNTHESIS/EFFECTS/ROUTING; 30 is dedicated LFO.
+    // Enter and leave without changing the global setting, then check neighbors.
+    for(const page of [0,30,0,29,31,54]){
+      c.w32(S.page,page);
+      c.d.set([delta,stock?knob:0x12345678,0x11223344,stock?4*knob:knob,44,55,66,77]);
+      c.a.set([0x720000,0x222000,0x333000,0x703000,0x555000,0x666000,0x777000,0xf00000]);
+      c.w32(stock?c.a[0]+1720:c.a[3],scale);
+      const d=[...c.d],a=[...c.a];c.call(code.labels[stock?'stock_speed':'speed']);
+      const factor=page!==30&&reverse&&knob<9&&(scale===1||scale===7)?8-scale:scale;
+      assert.equal(c.d[0],delta*factor,JSON.stringify({stock,slot,reverse,knob,scale,delta,page}));
+      assert.equal(c.d[2],stock?scale:127);
+      assert.deepEqual([...c.d].filter((_,i)=>i!==0&&i!==2),d.filter((_,i)=>i!==0&&i!==2));
+      assert.deepEqual([...c.a],a);assert.equal(c.r8(S.settings+178*slot),reverse?65:1);
+      assert.equal(c.r32(S.page),page);
+    }
+  }
+});
+
 test('native settings editor changes only the requested bit and slot; resolution and reverse are independent',()=>{
   const c=cpu();let panel=0;c.stubs.set(S.panel,()=>panel++);
   for(let slot=0;slot<8;slot++)for(const initial of [0,1,64,65])for(const row of [0,1])for(const delta of [-1,0,1]){

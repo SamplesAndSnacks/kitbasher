@@ -93,6 +93,9 @@ export function encoderSettingsCode(s: EncoderSettings, org: number) {
   // Include the eight data-entry knobs and LEVEL; leave sound selection intact.
   i('lea','-16(a7)','a7'); i('movem.l','d1/a0-a1','(a7)'); i('move.l','d0','12(a7)');
   i('move.l','(a3)','a1'); i('cmpi.l','#9','d3'); i('bcc.b','multiply');
+  // Native LFO setup (FUNCTION + SYNTHESIS/EFFECTS/ROUTING) keeps its speeds.
+  // The regular ROUTING parameter page is page 0, so it still honors the mode.
+  i('move.l',abs(s.page),'d1'); i('cmpi.l','#30','d1'); i('beq.b','multiply');
   i('bsr.w','setting'); i('move.b','(a0)','d1'); i('btst','#6','d1'); i('beq.b','multiply');
   i('move.l','a1','d1'); i('cmpi.l','#1','d1'); i('beq.b','reverse');
   i('cmpi.l','#7','d1'); i('bne.b','multiply');

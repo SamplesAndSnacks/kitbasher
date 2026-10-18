@@ -1,6 +1,6 @@
 # KOOK
 
-Author: SamplesAndSnacks. Version 0.1 (KK).
+Author: SamplesAndSnacks. Version 0.1 (BRD-KK).
 
 Original release: https://github.com/SamplesAndSnacks/machinedrum-rasp. The SysEx file is
 preserved byte-for-byte and pinned by SHA-256 in the catalog.

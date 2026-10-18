@@ -684,7 +684,7 @@
     },
     {
       "file": "mds/community/samplesandsnacks/rasp/RASP.syx",
-      "sha256": "482300c133eb82607921e52108f81d141f7f2797236d41f71019f17d957ca6b8",
+      "sha256": "9d699d3ad9154e4da6c3e6e666e97066994b191a0c8685f5c2d64f6e126d7e67",
       "channel": "community",
       "author": "SamplesAndSnacks",
       "summary": "Blown trill",
@@ -692,11 +692,11 @@
       "project": "https://github.com/SamplesAndSnacks/machinedrum-rasp",
       "license": "MIT",
       "hardware": "all",
-      "notes": "Works on UW and non-UW models; uses no sample ROM."
+      "notes": "Works on UW and non-UW models; uses no sample ROM. Recategorised for this library from the original release: category and code changed to PHY-RS (description CRC, content ID and package CRC recomputed); program, machine ID, controls and cycle declaration unchanged."
     },
     {
       "file": "mds/community/samplesandsnacks/kook/KOOK.syx",
-      "sha256": "15b095217ff0e866d28431f0baf568cfdb553746c32aadb33cf33a15cb8c33a0",
+      "sha256": "d71fb3a6245550da7ebaae981be7676a5aabbae7b13e2931ce60962fcdd87276",
       "channel": "community",
       "author": "SamplesAndSnacks",
       "summary": "Laughing kookaburra",
@@ -704,11 +704,11 @@
       "project": "https://github.com/SamplesAndSnacks/machinedrum-rasp",
       "license": "MIT",
       "hardware": "all",
-      "notes": "Works on UW and non-UW models; uses no sample ROM."
+      "notes": "Works on UW and non-UW models; uses no sample ROM. Recategorised for this library from the original release: category and code changed to PHY-KK (description CRC, content ID and package CRC recomputed); program, machine ID, controls and cycle declaration unchanged."
     },
     {
       "file": "mds/community/samplesandsnacks/smsh/SMSH.syx",
-      "sha256": "92f918ae0ded858b575a3bf29f0848659edcc870a3a5fb1fedb953ed46a7e0b6",
+      "sha256": "40949abcd86a097fca8f17762714c6b0dd92e3c9db54b89aacaffc6fe331c998",
       "channel": "community",
       "author": "SamplesAndSnacks",
       "summary": "Piano smash",
@@ -716,7 +716,7 @@
       "project": "https://github.com/SamplesAndSnacks/machinedrum-rasp",
       "license": "MIT",
       "hardware": "all",
-      "notes": "Works on UW and non-UW models; uses no sample ROM."
+      "notes": "Works on UW and non-UW models; uses no sample ROM. Recategorised for this library from the original release: category and code changed to PHY-SM (description CRC, content ID and package CRC recomputed); program, machine ID, controls and cycle declaration unchanged."
     }
   ]
 }

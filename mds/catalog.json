@@ -713,6 +713,18 @@
       "license": "MIT",
       "hardware": "all",
       "notes": "Works on UW and non-UW models; uses no sample ROM."
+    },
+    {
+      "file": "mds/community/samplesandsnacks/kook/KOOK.syx",
+      "sha256": "15b095217ff0e866d28431f0baf568cfdb553746c32aadb33cf33a15cb8c33a0",
+      "channel": "community",
+      "author": "SamplesAndSnacks",
+      "summary": "Laughing kookaburra",
+      "source": null,
+      "project": "https://github.com/SamplesAndSnacks/machinedrum-rasp",
+      "license": "MIT",
+      "hardware": "all",
+      "notes": "Works on UW and non-UW models; uses no sample ROM."
     }
   ]
 }
